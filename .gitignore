@@ -1,0 +1,11 @@
+.vs/
+**/bin/
+**/obj/
+*.user
+*.suo
+*.dbmdl
+*.cache
+TestJQuery/appsettings.Local.json
+
+# File di appunti privati per lo sviluppo
+DEVNOTES.md

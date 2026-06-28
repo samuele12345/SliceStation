@@ -1,0 +1,6 @@
+<Solution>
+  <Folder Name="/Elementi di soluzione/">
+    <File Path=".gitignore" />
+  </Folder>
+  <Project Path="TestJQuery/TestJQuery.csproj" />
+</Solution>
