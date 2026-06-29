@@ -1,5 +1,7 @@
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using TestJQuery.Data;
+using TestJQuery.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,6 +12,16 @@ builder.Configuration.AddJsonFile("appsettings.Local.json", optional: true, relo
 
 builder.Services.AddDbContext<TestJQueryContext>(options =>
 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnectionString")));
+
+builder.Services.AddIdentity<ApplicationUser, IdentityRole>(option =>
+{
+    option.Password.RequiredLength = 8;
+    option.Password.RequireNonAlphanumeric = false;
+    option.Password.RequireUppercase = false;
+    option.Password.RequireLowercase = false;
+})
+    .AddEntityFrameworkStores<TestJQueryContext>()
+    .AddDefaultTokenProviders();
 
 builder.Services.AddLogging();
 
@@ -26,12 +38,14 @@ app.UseHttpsRedirection();
 
 app.UseRouting();
 
+
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapStaticAssets();
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}")
+    pattern: "{controller=Home}/{action=Esercitazione}/{id?}")
    .WithStaticAssets();
 
 app.Run();

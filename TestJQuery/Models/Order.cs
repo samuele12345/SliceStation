@@ -9,7 +9,9 @@ namespace TestJQuery.Models
         public DateTime OrderDate { get; set; }
 
         [ForeignKey("UserId")]
-        public int? UserId { get; set; }
+        public string? UserId { get; set; }
+
+        public ApplicationUser? AppUser { get; set; }
 
         public ICollection<Pizza>? Pizzas { get; set; }
     }
