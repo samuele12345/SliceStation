@@ -2,9 +2,246 @@
     ViewData["Title"] = "Home page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="text-center d-flex align-items-center flex-column">
+    <h1 id="tit">Titolo principale</h1>
+
+    <div class="text-center div1">
+        <p>Testo evento</p>
+        <button id="but-tit">Premi</button>
+        <input type="text" id="inp1">
+        <p id="text-change">base</p>
+    </div>
+
+    <!--esempio di accordion, tiolo che fa a prire o chiudere un paragrafo al click, in questo caso non è necessario usare jquery ma solo css-->
+    <div class="text-center div2">
+        <h2 id="tit-accord">Accordion</h2>
+        <p id="par-accord">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed diam nonnumy eiusmod tempor incidunt ut labore et dolore magna aliquam erat voluptat. Ut enim ad minim veniam, quis nostrud exercitation ullamcorpor suscipit laborios nisi ut aliquip ex ea commodo consequat. Duis autem vel eum irure reprehenderit in voluptate velit esse nihil molestiae consequat, vel illum dolore eu fugiat nulla pariatur. At vero eos et accusam et iusto odio dignissim ducim qui blandit praesent luptatum delenit atgue duos dolor et molestias exceptur sint occaecat cupiditat non provident, simil sunt in culpa qui officia deserunt mollit anim id est laborum et dolor fuga. Et harumd dererud facilis est er expedit distinct. Nam liber tempor cum soluta</p>
+    </div>
+
+    <div class="w-100 cont">
+        <div id="div-quad"></div>
+    </div>
+
+    
+    <button id="but-start" class="mt-3">start</button>
+    <button id="but-stop" class="mt-3 mb-3">skip</button>
+
+    <h3>Inserire normale o grassetto</h3>
+    <input type="text" id="inp2">
+    <p id="par-prova">Testo di prova</p>
+
+
+    <h3 id="tit-sito"> <a id="link-sito" href="https://www.google.com" target="_blank">Link a google</a></h3>
+    <button id="but-link">Cambia link</button>
 </div>
 
+<style>
 
+    but-start{
+        margin-top: 20px;
+    }
+
+    #tit{
+        display: visible;
+
+    }
+
+    #tit.hidden{
+        display: none;
+    }
+
+    #tit-accord:hover{
+        cursor: pointer;
+        color: blue;
+    }
+
+    #par-accord{
+        display: hidden;
+    }
+
+    #div-quad{
+        height: 200px;
+        width: 200px;
+        border: 1px solid black;
+        position: absolute;
+    }
+
+    .cont{
+        position: relative;
+        height: 200px;
+    }
+
+    
+
+</style>
+
+
+
+<script>
+    $(document).ready(function(){
+
+        let anim = false;
+        const btit = $("#but-link");
+        const lin = $("#link-sito");
+
+        // prima alternativa, più adatta a singoli tasti, uno per mostrare e l'altro per nascondre, in questo caso meglio usare toggle
+        /*
+        $("button").click(function(){
+            if($("#tit").is(":visible")){
+                $("#tit").hide();
+            }else{
+                $("#tit").show();
+            }
+        });
+        */
+
+       // toggle condensa hide e show
+        $("#but-tit").click(function(){
+            //$("#tit").toggle(2000); // ci mette 2 secondi ad apparire o scomparire, in questo caso si muove da sinistra a destra e viceversa
+            // alternative: slideToggle, fadetoggle
+            //$("#tit").toggleClass("hidden"); // in questo caso usa css
+
+            //$("#tit").fadeToggle(2000); // comprende fadeIn e fadeOut, dissolvenza
+            //$("#tit").fadeTo(2000, 0.5); // per eseguire un fade in 2 secondi dello m0.5 dell'opacità
+
+            $("#tit").slideToggle(2000);  // comprende slideUp e slideDown, scorrimento verso l'altp o verso il basso (migliore)
+        });
+
+
+
+        //keypress nel caso in cui pre,ma un qualsiasi tasto
+        // keydown quando tengo premuto un tasto
+        // keyup quando rilascio un tasto
+        // on load quando un documento ha caricato ma non è pronto
+
+        //hover
+        $(".div1").mouseenter(function(){
+            $(this).css("background-color", "rgba(0, 100, 255, 0.1)");
+        })
+
+        $(".div1").mouseleave(function(){
+            $(this).css("background-color", "transparent");
+        })
+
+
+        /*
+        // se sono focussato in nquesto caso su un campo input
+        $("input").focus(function(){
+            $("#text-change").text("sei nel campo");
+        });
+
+        // se esco dal campo
+        $("input").blur(function(){
+            $("#text-change").text("non sei nel campo");
+        });
+
+        // se cambio il valore del campo
+        $("input").change(function(){
+            console.log("cambio");
+            // in questo caso ha la precedneza sul testo blur
+            $("#text-change").text("testo cambiato");
+        });
+        */
+
+        // si possono riassumere gli eventi relativi ad un tag con on:
+        // ncome uno switch
+
+        $("#inp1").on({
+            focus: function(){
+                $("#text-change").text("sei nel campo");
+                
+            },
+
+            blur: function(){
+                $("#text-change").text("non sei nel campo");
+            },
+
+            change: function(){
+                console.log("cambio");
+                // in questo caso ha la precedneza sul testo blur
+                $("#text-change").text("testo cambiato");
+            },
+
+            keypress: function(e){
+                if(e.key == "Enter"){ // se viene premuto enter (con input selezionato) si entra nell'if
+                    console.log($(this).val()); // stampa del contenuto dell'input
+                    console.log($("#inp1").attr("type")); // ritorna il tipo di attributo relativo al tag selezionato, in questo caso input
+                }
+            },
+        })
+
+        $(this).on({
+            keypress: function(e){
+                if(e.key == "Enter"){
+                    console.log("hai premuto enter");
+                }
+            }
+        })
+
+        $("#tit-accord").click(function(){
+            $("#par-accord").toggle(3000);
+        })
+
+        $("#but-start").click(function(){
+            
+            if(anim == false){
+                $("#div-quad").fadeIn(1000).animate(
+                {
+                    left: '300px',
+                    width: '100px',
+                    height: '100px',
+                }, 2000);
+                anim = true;
+            }else{
+                $("#div-quad").animate(
+                {
+                    left: '0px',
+                    width: '200px',
+                    height: '200px',
+                }, 2000).fadeOut(1000, function(){
+                    alert("Animazione terminata");
+                });
+                anim = false;
+            }
+            
+        })
+
+        $("#but-stop").click(function(){
+            //$("#div-quad").stop(true); // in stop(interrompere animazione, saltare animazione)
+
+            $("#div-quad").stop(false, true); // salta l'animazione in corso
+        })
+
+        $("#inp2").on({
+           keypress: 
+                function(e){
+                    if(e.key == "Enter"){
+                        let val = $(this).val();
+                        if(val == "normale"){
+                            //$("#par-prova").css("font-weight", "400");
+                            $("#par-prova").html("Testo di prova");
+                        }else if(val == "grassetto"){
+                            //$("#par-prova").css("font-weight", "700");
+                            $("#par-prova").html("<strong>Testo di prova</strong>");
+                        }
+                    }
+                },
+            
+            blur: 
+                function(){
+                    $(this).val("");
+                },
+        })
+
+        
+        btit.click(function(){
+            if(lin.text() === "Link a google"){
+                lin.text("Link a youtube");
+                lin.attr("href", "https://www.youtube.com")
+            }else if(lin.text() === "Link a youtube"){
+                lin.text("Link a google");
+                lin.attr("href", "https://www.google.com");
+            }
+        })
+    });
+</script>
