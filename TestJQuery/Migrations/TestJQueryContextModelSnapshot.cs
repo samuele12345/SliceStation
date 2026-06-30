@@ -244,7 +244,7 @@ namespace TestJQuery.Migrations
 
                     b.HasIndex("AppUserId");
 
-                    b.ToTable("Orders");
+                    b.ToTable("Orders", (string)null);
                 });
 
             modelBuilder.Entity("TestJQuery.Models.Pizza", b =>
@@ -271,7 +271,7 @@ namespace TestJQuery.Migrations
 
                     b.HasIndex("OrderId");
 
-                    b.ToTable("Pizzas");
+                    b.ToTable("Pizzas", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

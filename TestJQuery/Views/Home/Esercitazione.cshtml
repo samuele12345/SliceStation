@@ -56,9 +56,39 @@
         <button id="clear">Pulisci</button>
         
     </div>
+
+
+    <p class="mt-4 mb-2 p-err">Testo Errore</p>
+    <p id="p-col">Colore: </p>
+
+    <button id="but-err">Clicca</button>
+
+    <div class="div-li mt-3 mb-2">
+        <ul class="u-list">
+            <li class="li-prim">Primo</li>
+            <li class="li-prim prova">Secondo</li>
+        </ul>
+
+        <ol class="o-list">
+            <li class="li-sec">Terzo</li>
+        </ol>
+    </div>
+
+    <button class="but-li">Premi</button>
+
+
+    <h1 class="mt-4 mb-3 tit-file">Testo dal file:</h1>
+    <p class="p-file mb-3">Text: </p>
+    <button class="but-file">Carica contenuto file</button>
 </div>
 
 <style>
+    .errore{
+        color: red;
+        font-weight: 700;
+    }
+
+
     #div-but-p-d{
         display: flex;
         flex-direction: row;
@@ -149,6 +179,18 @@
         const aggPrimaDiv = $("#bt-agg-prima-div");
         const aggDopoDiv = $("#bt-agg-dopo-div");
         const cl = $("#clear"); 
+        const pErr = $(".p-err");
+        const bErr = $("#but-err");
+        const pCol = $("#p-col");
+        const dLi = $(".div-li");
+        const uL = $(".u-list");
+        const oL = $(".o-list");
+        const lP = $(".li-prim");
+        const lS = $(".li-sec");
+        const bLi = $(".but-li");
+        const tFile = $(".tit-file");
+        const pFile = $(".p-file");
+        const bFile = $(".but-file");
 
         // prima alternativa, più adatta a singoli tasti, uno per mostrare e l'altro per nascondre, in questo caso meglio usare toggle
         /*
@@ -335,5 +377,107 @@
             // pr.remove(); // elimina il div stesso
         })
 
+        pCol.append(pCol.css("color"))
+
+        bErr.click(function(){
+            pErr.toggleClass("errore"); // contiene addClass e RemoveClass
+
+            let colore = pErr.hasClass("errore") ? "red" : "black";
+            pCol.css("color", colore).text(colore);
+            
+        })
+
+        
+        let attivo = false;
+        bLi.click(function(){
+            if(!attivo){
+                uL.children(/*".prova"*/ /*si possono inserire classi per una maggiore precisione*/).css({"border": "1px solid black", "background": "rgba(0,0,0,0.2)"});
+                attivo = true;
+            }else{
+                uL.children().css({"border": "none", "background": "transparent"}); // prende il primo figlio , aggiungendo un altro .children prende il nipote, find(selettore), prende tutti i figli del tipo del selettore, con .first() solo il primo, invece con find(selettore).eq(n) si trova il discendente (sia figlio che nipote... che sia) di numero n, concatenare children().eq(n).children().eq(m)
+                // l'inverso vale per parent() per il genitore diretto, parents() per tutti i genitori, parentsUntil() per arrivare ad un determinato livello di ascendenti
+                attivo = false;
+            }
+        })
+        
+        
+       // questo su riferisce al parent, quindi agisce sul genitore diretto, ovvero il div
+       /*
+        let attivo = false;
+        bLi.click(function(){
+            if(!attivo){
+                uL.parent().css({"border": "1px solid black", "background": "rgba(0,0,0,0.2)"});
+                attivo = true;
+            }else{
+                uL.parent().css({"border": "none", "background": "transparent"}); 
+                attivo = false;
+            }
+        })
+       */
+
+      // .siblings() serve per selezionare gli altri elementi allo stesso livello
+      // .next() il sibling successsivo, .nextAll() tutti i successivi, .prev() quello precedente, .prevAll() tutti i precedenti
+      // .nextUntil(n) successivi fino a un certo tag, .prevUntil() pecedenti fino a un certo tag, ad esempio .prevUntil("h1")
+
+      
+      // IDEA: caricamento file e sviluppo ocr con api
+      bFile.click(function(){
+          // caricamento del contenuto testuale di un file
+          $.get("/txt/prova.txt", function(data){
+              pFile.text("Text: ");
+              pFile.append(data);
+          })
+
+          /*
+          $.getJSON("/json/Prova.json", function(data){ // ottiene i dati dal json e li stampa nella console
+              console.log(data);
+          })
+          // esiste anche post ma meglio usare la sintassi ajax
+          */
+
+         // in questo modo viene eseguito get sul file prova.json e viene stampato l'oggetto contenuto nella console
+         $.ajax({
+             url: "/json/prova.json", 
+             type: "get",
+             dataType: "json",
+             data: $(this).serialize(), // utile per form. S    erializza i campi di un form in una query string, es. nome=Mario&eta=20
+             success: function(response){
+                 console.log(response);
+             },
+             // jqXHR: contiene status (codice http) e risposta testuale, header, abort...
+             // textStatus: esito tecnico della richiesta come "success", "error", "timeout", "parsererror"...
+                 // errorThrown: messaggio errore restituito, come "Not Found" e "Internal Server Error"
+             error: function(jqXHR, textStatus, errorThrown){
+                 console.log(textStatus, errorThrown);
+             }
+
+             /*
+                •	form HTML normale → serialize()
+                •	dati strutturati → oggetto JS
+                •	API JSON / backend moderno → JSON.stringify()
+                •	file → FormData
+
+            // singolo input o pochi campi, oggetto js
+            data: {
+                nome: $("#nome").val(),
+                email: $("#email").val()
+            }
+
+            // json verso backend
+
+            data: JSON.stringify({
+                nome: $("#nome").val(),
+                email: $("#email").val()
+            }),
+            contentType: "application/json"
+
+            // leggere un valore singolo:
+            let nome = $("#nome").val();
+
+            // file upload / multipart, FormData($("#mioForm")[0]);
+            let formData = new FormData($("#mioForm")[0]);
+             */
+         })
+      })
     });
 </script>
