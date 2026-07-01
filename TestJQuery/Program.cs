@@ -45,7 +45,7 @@ app.UseAuthorization();
 app.MapStaticAssets();
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Esercitazione}/{id?}")
+    pattern: "{controller=Home}/{action=Index}/{id?}")
    .WithStaticAssets();
 
 app.Run();

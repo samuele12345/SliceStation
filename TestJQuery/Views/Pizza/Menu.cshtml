@@ -1,0 +1,61 @@
+﻿
+@{
+    ViewData["Title"] = "Menu"; 
+}
+
+<style>
+    /* Rimuovi margini/padding da layout principale */
+    body {
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    main {
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    
+
+    .card-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 15px;
+        padding: 20px; /* ← Aggiungi padding interno */
+    }
+
+    #elencoPizze{
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .cont-pizza {
+        border: 1px solid #ddd;
+        padding: 15px;
+        border-radius: 8px;
+        background: #f9f9f9;
+    }
+
+    .cont-pizza p {
+        margin: 5px 0;
+    }
+
+    #searchInput {
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+</style>
+
+
+<div class="card-container">
+    <h1>@ViewData["Title"]</h1>
+    <input type="text" id="searchInput" />
+    <div id="elencoPizze"></div>
+</div>
+
+@section Scripts{
+    <script src="~/js/Pizza.js"></script>
+}
