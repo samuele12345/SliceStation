@@ -11,8 +11,8 @@ namespace TestJQuery.Models
         [ForeignKey("UserId")]
         public string? UserId { get; set; }
 
-        public ApplicationUser? AppUser { get; set; }
+        public ApplicationUser? User { get; set; }
 
-        public ICollection<Pizza>? Pizzas { get; set; }
+        public ICollection<OrderedPizza>? OrderedPizzas { get; set; }
     }
 }

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TestJQuery.Data;
 
@@ -11,9 +12,11 @@ using TestJQuery.Data;
 namespace TestJQuery.Migrations
 {
     [DbContext(typeof(TestJQueryContext))]
-    partial class TestJQueryContextModelSnapshot : ModelSnapshot
+    [Migration("20260701121541_Default e relazioni")]
+    partial class Defaulterelazioni
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -271,7 +274,7 @@ namespace TestJQuery.Migrations
 
                     b.HasIndex("OrderId");
 
-                    b.ToTable("OrderedPizzas");
+                    b.ToTable("OrderedPizza");
                 });
 
             modelBuilder.Entity("TestJQuery.Models.Pizza", b =>
