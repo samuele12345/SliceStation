@@ -1,0 +1,46 @@
+﻿@using Microsoft.AspNetCore.Identity
+@model TestJQuery.Models.ApplicationUser;
+@inject UserManager<ApplicationUser> userManager;
+
+@{
+    ViewData["Title"] = "Profile";
+    var user = await userManager.GetUserAsync(User);
+}
+
+<style>
+    .campo{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-start;
+        gap:5px;
+        height: 100px;
+        width: 200px;
+    }
+</style>
+
+<h2>@ViewData["Title"]</h2>
+
+
+<div class="box-container">
+    
+    <div class="campo">
+        <p class="campo-mail">Email: @user?.Email</p>
+        
+    </div>
+
+    <div class="campo">
+        <p class="campo-name">Name: @user.FullName</p>
+    </div>
+
+    
+</div>
+
+<div>
+    <button class="modifica">Modifica</button>
+</div>
+
+
+@section Scripts{
+    <script src="~/js/Profile.js"></script>
+}

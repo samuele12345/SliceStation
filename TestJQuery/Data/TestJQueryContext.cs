@@ -31,6 +31,11 @@ namespace TestJQuery.Data
                 .WithMany(o => o.Orders)
                 .HasForeignKey(au => au.UserId);
 
+            modelBuilder.Entity<Review>()
+                .HasOne(u => u.User)
+                .WithMany(r => r.Reviews)
+                .HasForeignKey(ui => ui.UserId);
+
             modelBuilder.Entity<Pizza>().HasData(
                     new Pizza
                     {

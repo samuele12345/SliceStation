@@ -15,10 +15,12 @@ options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnectio
 
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>(option =>
 {
+    option.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
     option.Password.RequiredLength = 8;
     option.Password.RequireNonAlphanumeric = false;
-    option.Password.RequireUppercase = false;
     option.Password.RequireLowercase = false;
+    option.Password.RequireUppercase = false;
+    option.Password.RequireDigit = false;
 })
     .AddEntityFrameworkStores<TestJQueryContext>()
     .AddDefaultTokenProviders();

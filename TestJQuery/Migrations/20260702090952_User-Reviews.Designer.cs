@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TestJQuery.Data;
 
@@ -11,9 +12,11 @@ using TestJQuery.Data;
 namespace TestJQuery.Migrations
 {
     [DbContext(typeof(TestJQueryContext))]
-    partial class TestJQueryContextModelSnapshot : ModelSnapshot
+    [Migration("20260702090952_User-Reviews")]
+    partial class UserReviews
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -163,9 +166,6 @@ namespace TestJQuery.Migrations
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
 
-                    b.Property<string>("Address")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
@@ -244,7 +244,7 @@ namespace TestJQuery.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Orders", (string)null);
+                    b.ToTable("Orders");
                 });
 
             modelBuilder.Entity("TestJQuery.Models.OrderedPizza", b =>
@@ -274,7 +274,7 @@ namespace TestJQuery.Migrations
 
                     b.HasIndex("OrderId");
 
-                    b.ToTable("OrderedPizzas", (string)null);
+                    b.ToTable("OrderedPizzas");
                 });
 
             modelBuilder.Entity("TestJQuery.Models.Pizza", b =>
@@ -296,7 +296,7 @@ namespace TestJQuery.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Pizzas", (string)null);
+                    b.ToTable("Pizzas");
 
                     b.HasData(
                         new
@@ -360,7 +360,7 @@ namespace TestJQuery.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Review", (string)null);
+                    b.ToTable("Review");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
