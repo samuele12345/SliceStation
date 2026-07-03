@@ -10,6 +10,8 @@ namespace TestJQuery.Models
 
         public decimal Price { get; set; }
 
+        public string Image { get; set; }
+
         public ICollection<OrderedPizza>? OrderedPizzas { get; set; }
 
     }

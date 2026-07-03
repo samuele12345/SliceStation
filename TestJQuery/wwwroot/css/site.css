@@ -50,3 +50,39 @@ main {
 main{
     width: 100vh;
 }
+
+.card{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 100px;
+}
+
+.cont-img-piz{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+#img-piz {
+    object-fit: cover;
+    height: 300px;
+    width: auto;
+    border-radius: 5px 0px 0px 5px;
+}
+
+#img-piz:hover {
+    animation: hov-piz 1s ease-out forwards;
+}
+
+@keyframes hov-piz{
+    0% {
+        transform: translateY(0px) translateX(0px);
+    }
+
+    100% {
+        transform: translateY(-15px) translateX(10px);
+    }
+}

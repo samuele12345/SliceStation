@@ -9,6 +9,7 @@
 
             const newEmail = $("#inp-email").val().trim();
             const newName = $("#inp-name").val().trim();
+            const newAddress = $("#inp-address").val().trim();
 
             $.ajax({
                 url: "/Account/CurrentUserData",
@@ -16,7 +17,8 @@
                 contentType: "application/json",
                 data: JSON.stringify({
                     email: newEmail,
-                    name: newName
+                    name: newName,
+                    address: newAddress
                 }),
                 success: function (response) {
                     if (response.success) {
@@ -34,7 +36,9 @@
                                     <p class="campo-name">Name: ${response.name}</p>
                                 </div>
 
-
+                                <div class="campo">
+                                    <p class="campo-address">Address: ${response.address}</p>
+                                </div>
                                 
                             `
                         )
@@ -84,6 +88,15 @@
 
                         
                                 </div>
+
+                                <div>
+                                    <div class="campo">
+                                        <p>Address: </p>
+                                        <input id="inp-address" type="text" value="${data.address}">
+                                    </div>
+
+                        
+                                </div>
                             `
                         )
                     }
@@ -91,7 +104,7 @@
                     inModifica = true;
                 },
                 error: function () {
-                    console.log("error i9n saving data")
+                    console.log("error in saving data")
                 }
             })
             

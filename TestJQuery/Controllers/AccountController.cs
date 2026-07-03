@@ -112,7 +112,8 @@ namespace TestJQuery.Controllers
                 {
                     success = true,
                     name = user.FullName,
-                    email = user.Email
+                    email = user.Email,
+                    address = user.Address
                 });
             }
         }
@@ -143,6 +144,7 @@ namespace TestJQuery.Controllers
             user.Email = model.Email;
             user.FullName = model.Name;
             user.UserName = model.Email;
+            user.Address = model.Address;
 
             var result = await _userManager.UpdateAsync(user);
 
@@ -152,7 +154,8 @@ namespace TestJQuery.Controllers
                     success = true,
                     message = "Utente aggiornato con successo",
                     name = user.FullName,
-                    email = user.Email
+                    email = user.Email,
+                    address = user.Address
                 });
             }
             else

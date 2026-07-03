@@ -42,35 +42,40 @@ namespace TestJQuery.Data
                         Id = 1,
                         Name = "Margherita",
                         Description = "Classic pizza with tomato sauce, mozzarella cheese, and fresh basil.",
-                        Price = 4.99m
+                        Price = 4.99m,
+                        Image = "/src/Margherita.jpg"
                     },
                     new Pizza
                     {
                         Id = 2,
                         Name = "Marinara",
                         Description = "Classic pizza with tomato sauce, garlic, and oregano.",
-                        Price = 4.99m
+                        Price = 4.99m,
+                        Image = "/src/Margherita.jpg"
                     },
                     new Pizza
                     {
                         Id = 3,
                         Name = "Quattro Formaggi",
                         Description = "Pizza with four different types of cheese: mozzarella, gorgonzola, parmesan, and ricotta.",
-                        Price = 5.99m
+                        Price = 5.99m,
+                        Image = "/src/Margherita.jpg"
                     },
                     new Pizza
                     {
                         Id = 4,
                         Name = "Capricciosa",
                         Description = "Pizza with tomato sauce, mozzarella, ham, mushrooms, artichokes, and olives.",
-                        Price = 6.49m   
+                        Price = 6.49m,
+                        Image = "/src/Margherita.jpg"
                     },
                     new Pizza
                     {
                         Id = 5,
                         Name = "Prosciutto",
                         Description = "Pizza with tomato sauce, mozzarella, and prosciutto.",
-                        Price = 5.49m
+                        Price = 5.49m,
+                        Image = "/src/Margherita.jpg"
                     }
                 );
 

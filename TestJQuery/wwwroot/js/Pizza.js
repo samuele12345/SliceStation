@@ -39,12 +39,16 @@ function renderPizzas(pizzas) {
     }
 
     pizzas.forEach(function (pizza) {
-        console.log("Pizza singola:", pizza); // ← DEBUG
         html += `
             <div class="card">
-                <p>Nome: ${pizza.name}</p>
-                <p>Descrizione: ${pizza.description}</p>
-                <p>Prezzo: €${pizza.price}</p>
+                <div class="cont-img-piz">
+                    <img id="img-piz" src="${pizza.image}"/>
+                </div>
+                <div class="cont-info-piz">
+                    <p>Nome: ${pizza.name}</p>
+                    <p>Descrizione: ${pizza.description}</p>
+                    <p>Prezzo: €${pizza.price}</p>
+                </div>
             </div>
         `
     })

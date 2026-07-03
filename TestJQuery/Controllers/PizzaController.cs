@@ -41,7 +41,8 @@ namespace TestJQuery.Controllers
                     p.Id,
                     p.Name,
                     p.Description,
-                    p.Price
+                    p.Price,
+                    p.Image
                 })
                 .ToListAsync();
 

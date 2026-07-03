@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TestJQuery.Data;
 
@@ -11,9 +12,11 @@ using TestJQuery.Data;
 namespace TestJQuery.Migrations
 {
     [DbContext(typeof(TestJQueryContext))]
-    partial class TestJQueryContextModelSnapshot : ModelSnapshot
+    [Migration("20260703161324_Prova img 2")]
+    partial class Provaimg2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -307,7 +310,7 @@ namespace TestJQuery.Migrations
                         {
                             Id = 1,
                             Description = "Classic pizza with tomato sauce, mozzarella cheese, and fresh basil.",
-                            Image = "/src/Margherita.jpg",
+                            Image = "TestJQuery\\wwwroot\\src\\Margherita.jpg",
                             Name = "Margherita",
                             Price = 4.99m
                         },
@@ -315,7 +318,7 @@ namespace TestJQuery.Migrations
                         {
                             Id = 2,
                             Description = "Classic pizza with tomato sauce, garlic, and oregano.",
-                            Image = "/src/Margherita.jpg",
+                            Image = "TestJQuery\\wwwroot\\src\\Margherita.jpg",
                             Name = "Marinara",
                             Price = 4.99m
                         },
@@ -323,7 +326,7 @@ namespace TestJQuery.Migrations
                         {
                             Id = 3,
                             Description = "Pizza with four different types of cheese: mozzarella, gorgonzola, parmesan, and ricotta.",
-                            Image = "/src/Margherita.jpg",
+                            Image = "TestJQuery\\wwwroot\\src\\Margherita.jpg",
                             Name = "Quattro Formaggi",
                             Price = 5.99m
                         },
@@ -331,7 +334,7 @@ namespace TestJQuery.Migrations
                         {
                             Id = 4,
                             Description = "Pizza with tomato sauce, mozzarella, ham, mushrooms, artichokes, and olives.",
-                            Image = "/src/Margherita.jpg",
+                            Image = "TestJQuery\\wwwroot\\src\\Margherita.jpg",
                             Name = "Capricciosa",
                             Price = 6.49m
                         },
@@ -339,7 +342,7 @@ namespace TestJQuery.Migrations
                         {
                             Id = 5,
                             Description = "Pizza with tomato sauce, mozzarella, and prosciutto.",
-                            Image = "/src/Margherita.jpg",
+                            Image = "TestJQuery\\wwwroot\\src\\Margherita.jpg",
                             Name = "Prosciutto",
                             Price = 5.49m
                         });
