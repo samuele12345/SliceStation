@@ -23,6 +23,11 @@ namespace TestJQuery.Controllers
             return View();
         }
 
+        public IActionResult Cart()
+        {
+            return View();
+        }
+
 
         [HttpGet]
         public async Task<IActionResult> PizzaMethod(string? search)

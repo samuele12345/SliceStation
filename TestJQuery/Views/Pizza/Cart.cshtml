@@ -1,0 +1,40 @@
+﻿@using Microsoft.AspNetCore.Identity
+@model Order
+@inject SignInManager<ApplicationUser> signInManager
+
+@{
+    ViewData["Title"] = "Cart";
+
+}
+
+<style>
+    #div-bottoni{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 15px;
+    }
+
+    #cont-order{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+</style>
+<div class="cont-order">
+    <h2>@ViewData["Title"]</h2>
+    @if (Model.OrderedPizzas?.Any() == true)
+    {
+        <div class="ordini"></div>
+    }
+    else
+    {
+        <p>Il carrello è vuoto!</p>
+    }
+    <div id="div-bottoni">
+        <button>Our Pizzas</button>
+        <button>Checkout</button>
+    </div>
+</div>

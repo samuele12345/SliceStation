@@ -73,8 +73,10 @@ main{
     border-radius: 5px 0px 0px 5px;
 }
 
-#img-piz:hover {
+.card:hover {
     animation: hov-piz 1s ease-out forwards;
+    box-shadow: -7px 6px 10px rgba(0,0,0,0.2);
+    cursor: pointer;
 }
 
 @keyframes hov-piz{
@@ -83,6 +85,6 @@ main{
     }
 
     100% {
-        transform: translateY(-15px) translateX(10px);
+        transform: translateY(-7px) translateX(7px);
     }
 }

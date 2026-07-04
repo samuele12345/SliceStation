@@ -45,9 +45,9 @@ function renderPizzas(pizzas) {
                     <img id="img-piz" src="${pizza.image}"/>
                 </div>
                 <div class="cont-info-piz">
-                    <p>Nome: ${pizza.name}</p>
-                    <p>Descrizione: ${pizza.description}</p>
-                    <p>Prezzo: €${pizza.price}</p>
+                    <h3>${pizza.name}</h3>
+                    <p>${pizza.description}</p>
+                    <p><strong>€${pizza.price}</strong></p>
                 </div>
             </div>
         `
