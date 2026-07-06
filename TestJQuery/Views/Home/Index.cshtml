@@ -2,14 +2,106 @@
     ViewData["Title"] = "Home page";
 }
 
+<style>
+    html, body{
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Lato";
+    }
+
+    body, html, main{
+        width: 100% !important;
+    }
+    .slides {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: row;
+        object-fit: cover;
+    }
+
+    .slide {
+        z-index: -1;
+        display: none;
+        width: 100%;
+        height:100vh;
+        object-fit: cover;
+    }
+
+    .slider {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: row;
+        overflow-x: hidden;
+    }
+
+    .slide.active{
+        display: block;
+        object-fit:cover;
+    }
+
+    body{
+        position: relative;
+    }
+
+    .infos{
+        z-index: 1;
+        position: absolute;
+        right: 50%;
+        transform: translateX(50%) ;
+        top: 40%;
+        width: 300px;
+        height: 200px;
+        pading: 20px 30px 20px 30px;
+        display: flex;
+        flex-direction: column; 
+        align-items: center; 
+        justify-content: center;
+        gap: 20px;
+        color: white;
+        text-shadow: 10px 10px 15px rgba(0,0,0,0.8);
+        animation: tit-an 1.5s ease-in-out forwards;
+    }
+
+    .infos > h2{
+        font-size: 200px;
+
+    }
+
+    .infos > h3 {
+        font-size: 40px;
+    }
+
+    @@keyframes tit-an{
+        0%{
+            opacity: 0.4;
+            transform: translateY(250px) translateX(50%);
+        }
+        
+
+        100% {
+            opacity: 1;
+            transform: translateY(0px) translateX(50%);
+        }
+    }
+    
+</style>
+
 <div class="slider">
     <div class="slides">
-        <img class="slide" src="~/src/foto_slider/foto1.jpg" />
         <img class="slide"  src="~/src/foto_slider/foto2.jpg" />
+        <img class="slide" src="~/src/foto_slider/foto1.jpg" />
         <img class="slide"  src="~/src/foto_slider/foto3.jpg" />
+        <div class="infos">
+            <h2>SliceStation</h2>
+            <h3><span>↓</span> Scroll Down <span>↓</span></h3>
+        </div>
     </div>
 </div>
 
-@section Scritps{
+@section Scripts{
     <script src="~/js/Slider.js"></script>
 }
