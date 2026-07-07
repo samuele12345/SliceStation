@@ -1,4 +1,4 @@
-﻿$(document).ready(function(){
+﻿$(document).ready(function () {
     const searchInput = $("#searchInput");
 
     loadPizzas();
@@ -55,3 +55,6 @@ function renderPizzas(pizzas) {
 
     contPizze.html(html);
 }
+
+
+

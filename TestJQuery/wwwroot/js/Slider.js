@@ -2,6 +2,49 @@
 const slides = document.querySelector(".slides");
 const slide = document.querySelectorAll(".slide");
 
+const imgObs = document.querySelectorAll(".img-obs");
+const parObs = document.querySelectorAll(".par-obs");
+
+// Parallax per le immagini dello slider
+const sliderImages = document.querySelectorAll(".slide");
+
+window.addEventListener('scroll', () => {
+    const scrolled = window.pageYOffset;
+
+    sliderImages.forEach(img => {
+        // 0.5 = si muovono alla metà della velocità dello scroll normale (parallax)
+        const translateY = scrolled * 0.5;
+
+        img.style.transform = `translateY(${translateY}px)`;
+    });
+});
+
+
+if (imgObs) {
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add("visible");
+
+                observer.unobserve(entry.target);
+            }
+
+        })
+    }, {
+        threshold: 0.3,
+    });
+
+    imgObs.forEach(element => {
+        observer.observe(element);
+    });
+
+    parObs.forEach(element => {
+        observer.observe(element);
+    })
+}
+
+
+
 
 
 if (slider) {

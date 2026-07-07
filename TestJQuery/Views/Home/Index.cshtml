@@ -7,14 +7,23 @@
         margin: 0;
         padding: 0;
         box-sizing: border-box;
-        font-family: "Lato";
         z-index: -5;
         background: rgba(0,0,0,0.7);
     }
 
+    h1, h2 {
+        font-family: 'Lora', sans-serif;
+    }
+    
+    body, p {
+        font-family: 'Lato', sans-serif;
+    }
+    
+
     body, html, main{
         width: 100% !important;
     }
+
     .slides {
         position: relative;
         width: 100%;
@@ -28,8 +37,10 @@
         z-index: -1;
         display: none;
         width: 100%;
-        height:100vh;
+        height: 120vh;  /* Aumenta altezza per compensare il movimento */
         object-fit: cover;
+        object-position: center top;  /* Allinea in alto */
+        will-change: transform;  /* Ottimizzazione performance */
     }
 
     .slider {
@@ -37,7 +48,7 @@
         height: 100vh;
         display: flex;
         flex-direction: row;
-        overflow-x: hidden;
+        overflow: hidden;  /* Nasconde tutto l'overflow */
     }
 
     .slide.active{
@@ -54,8 +65,8 @@
         position: absolute;
         right: 50%;
         transform: translateX(50%) ;
-        top: 40%;
-        width: 300px;
+        top: 45%;
+        width: auto;  /* Larghezza automatica basata sul contenuto */
         height: 200px;
         pading: 20px 30px 20px 30px;
         display: flex;
@@ -70,7 +81,7 @@
 
     .infos > h2{
         font-size: 200px;
-
+        white-space: nowrap;  /* Non va mai a capo */
     }
 
     .infos > h3 {
@@ -101,7 +112,7 @@
     }
 
     .main-container{
-        margin-top: 80px;
+        margin-top: 100px;
         width: 100%;
         height: auto;
         display: flex;
@@ -117,6 +128,7 @@
         flex-direction: row;
         justify-content: space-between;
         color: rgba(255,255,255, 0.8);
+        overflow: hidden; 
     }
 
     .cont-par{
@@ -138,8 +150,101 @@
     .f-pizzeria{
         width: 40%;
         height: auto;
+        transition: transform 0.1s ease-out;  /* Transizione fluida */
+        will-change: transform;  /* Ottimizzazione performance */
     }
-    
+
+    .img-obs{
+        visibility: hidden;
+    }
+
+    .img-obs:nth-child(1).visible{
+        animation: img-anim 3s forwards;
+    }
+
+    .img-obs:nth-child(2).visible {
+        animation: img-anim2 3s forwards;
+    }
+
+    @@keyframes img-anim{
+        0%{
+            opacity: 0.4;
+            transform: translateX(-350px);
+
+        }
+
+        100% {
+            visibility: visible;
+            opacity: 1;
+            transform: translateX(0px);
+        }
+
+    }
+
+    @@keyframes img-anim2 {
+        0% {
+            opacity: 0.4;
+            transform: translateX(350px);
+        }
+
+        100% {
+            visibility: visible;
+            opacity: 1;
+            transform: translateX(0px);
+        }
+    }
+
+
+    .par-obs{
+        visibility: hidden;
+    }
+
+    .par-obs.visible{
+        animation: par-anim 3s forwards;
+    }
+
+    @@keyframes par-anim {
+        0% {
+            opacity: 0.4;
+        }
+
+        100% {
+            visibility: visible;
+            opacity: 1;
+        }
+    }
+
+    .nostri-servizi{
+        margin-top: 120px;
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;  /* Centra il contenuto */
+        background: rgba(0,0,0,0.2);
+        padding: 20px 0px;
+    }
+
+    .freccia-g{
+        display: inline-block;  /* Necessario per transform su span */
+        animation: ar 3s infinite;
+    }
+
+    @@keyframes ar{
+        0%{
+            transform: translateY(10px)
+        }
+
+        50% {
+            transform: translateY(-10px)
+        }
+
+        100% {
+            transform: translateY(10px)
+        }
+    }
+
+
+   
 </style>
 
 <div class="slider">
@@ -148,8 +253,8 @@
         <img class="slide" src="~/src/foto_slider/foto1.jpg" />
         <img class="slide"  src="~/src/foto_slider/foto3.jpg" />
         <div class="infos">
-            <h2>SliceStation</h2>
-            <h3><span>↓</span> Scroll Down <span>↓</span></h3>
+            <h2>Slice Station</h2>
+            <h3><span class="freccia-g">↓</span> Scroll Down <span class="freccia-g">↓</span></h3>
         </div>
 
         
@@ -158,10 +263,21 @@
 
 <div class="main-container">
     <div class="chi-siamo">
-        <img src="~/src/pizzeria_orizzontale.jpg" class="f-pizzeria"/>
-        <div class="cont-par">
-            <h1>Chi Siamo</h1>
-            <h4>Slice Station nasce nel 2016 da un'idea semplice: portare la pizza vera, quella con l'impasto lievitato 24 ore e gli ingredienti scelti ogni giorno al mercato, in un ambiente informale e accogliente. Quello che era partito come un piccolo forno a legna in Via dei Mille 14, a Bologna, oggi è diventato un punto di riferimento per chi cerca una pizza artigianale senza rinunciare alla velocità di una serata tra amici. La stessa passione della prima infornata guida ancora ogni fetta che esce dal nostro forno.</h4>
+        <img src="~/src/pizzeria_orizzontale.jpg" class="f-pizzeria img-obs"/>
+        <div class="cont-par par-obs">
+            <h1>About Us</h1>
+            <h4><strong>Slice Station</strong> was born in 2016 from a simple idea: bring <strong>real pizza</strong> — the kind with 24-hour risen dough and ingredients picked fresh from the market every day — into a casual, welcoming space. What started as a small wood-fired oven at Via dei Mille 14, Bologna, has since grown into a go-to spot for anyone craving <strong>artisanal pizza</strong> without giving up the pace of a quick night out with friends. The same passion from that first batch still guides every slice that comes out of our oven.</h4>
+        </div>
+    </div>
+
+    <div class="nostri-servizi">
+        <div class="chi-siamo">
+            
+            <div class="cont-par par-obs">
+                <h1>About Us</h1>
+                <h4><strong>Slice Station</strong> was born in 2016 from a simple idea: bring <strong>real pizza</strong> — the kind with 24-hour risen dough and ingredients picked fresh from the market every day — into a casual, welcoming space. What started as a small wood-fired oven at Via dei Mille 14, Bologna, has since grown into a go-to spot for anyone craving <strong>artisanal pizza</strong> without giving up the pace of a quick night out with friends. The same passion from that first batch still guides every slice that comes out of our oven.</h4>
+            </div>
+            <img src="~/src/pizzeria_orizzontale.jpg" class="f-pizzeria img-obs" />
         </div>
     </div>
 </div>
