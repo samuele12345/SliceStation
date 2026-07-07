@@ -42,6 +42,18 @@
 
         .img-logo:hover {
             transform: scale(1.03);
+            animation: logo 0.8s forwards;
+            border-radius: 20px;
+        }
+
+        @@keyframes logo{
+            0%{
+                background: none;
+            }
+
+            100%{
+                background: rgba(255,255,255, 0.8);
+            }
         }
     </style>
 

@@ -8,6 +8,8 @@
         padding: 0;
         box-sizing: border-box;
         font-family: "Lato";
+        z-index: -5;
+        background: rgba(0,0,0,0.7);
     }
 
     body, html, main{
@@ -32,7 +34,7 @@
 
     .slider {
         width: 100%;
-        height: 100%;
+        height: 100vh;
         display: flex;
         flex-direction: row;
         overflow-x: hidden;
@@ -75,6 +77,16 @@
         font-size: 40px;
     }
 
+    @@media(max-width: 1500px){
+        .infos > h2 {
+            font-size: 150px;
+        }
+
+        .infos > h3 {
+            font-size: 25px;
+        }
+    }
+
     @@keyframes tit-an{
         0%{
             opacity: 0.4;
@@ -87,6 +99,46 @@
             transform: translateY(0px) translateX(50%);
         }
     }
+
+    .main-container{
+        margin-top: 80px;
+        width: 100%;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        padding-bottom: 100px;
+    }
+
+    .chi-siamo{
+        width: 80%;
+        display: flex; 
+        flex-direction: row;
+        justify-content: space-between;
+        color: rgba(255,255,255, 0.8);
+    }
+
+    .cont-par{
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+        width: 50%;
+    }
+
+    .cont-par > h1{
+        margin-bottom: 25px;
+    }
+
+    .cont-par > h4{
+        line-height: 1.7;
+    }
+
+    .f-pizzeria{
+        width: 40%;
+        height: auto;
+    }
     
 </style>
 
@@ -98,6 +150,18 @@
         <div class="infos">
             <h2>SliceStation</h2>
             <h3><span>↓</span> Scroll Down <span>↓</span></h3>
+        </div>
+
+        
+    </div>
+</div>
+
+<div class="main-container">
+    <div class="chi-siamo">
+        <img src="~/src/pizzeria_orizzontale.jpg" class="f-pizzeria"/>
+        <div class="cont-par">
+            <h1>Chi Siamo</h1>
+            <h4>Slice Station nasce nel 2016 da un'idea semplice: portare la pizza vera, quella con l'impasto lievitato 24 ore e gli ingredienti scelti ogni giorno al mercato, in un ambiente informale e accogliente. Quello che era partito come un piccolo forno a legna in Via dei Mille 14, a Bologna, oggi è diventato un punto di riferimento per chi cerca una pizza artigianale senza rinunciare alla velocità di una serata tra amici. La stessa passione della prima infornata guida ancora ogni fetta che esce dal nostro forno.</h4>
         </div>
     </div>
 </div>
