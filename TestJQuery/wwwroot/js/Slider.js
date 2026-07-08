@@ -1,8 +1,10 @@
 ﻿const slider = document.querySelector(".slider");
 const slides = document.querySelector(".slides");
 const slide = document.querySelectorAll(".slide");
+const slide2 = document.querySelectorAll(".slide-piz");
 
 const imgObs = document.querySelectorAll(".img-obs");
+const imgObs2 = document.querySelectorAll(".img-obs2");
 const parObs = document.querySelectorAll(".par-obs");
 
 // Parallax per le immagini dello slider
@@ -38,6 +40,11 @@ if (imgObs) {
         observer.observe(element);
     });
 
+    imgObs2.forEach(element => {
+        observer.observe(element);
+    });
+
+
     parObs.forEach(element => {
         observer.observe(element);
     })
@@ -56,6 +63,7 @@ if (slider) {
 
     function slideDefault() {
         slide[slideIndex].classList.add("active");
+        slide2[slideIndex].classList.add("active");
         intervalId = setInterval(nextSlide, 5000);
     }
 
@@ -70,8 +78,13 @@ if (slider) {
             slide.classList.remove("active");
         })
 
+        slide2.forEach(slide => {
+            slide.classList.remove("active");
+        })
+
         slideIndex = index;
         slide[slideIndex].classList.add("active");
+        slide2[slideIndex].classList.add("active");
     }
 
 

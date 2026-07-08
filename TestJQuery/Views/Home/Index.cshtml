@@ -16,7 +16,7 @@
     }
     
     body, p {
-        font-family: 'Lato', sans-serif;
+        font-family: 'Lora', sans-serif;
     }
     
 
@@ -63,12 +63,11 @@
     .infos{
         z-index: 1;
         position: absolute;
-        right: 50%;
-        transform: translateX(50%) ;
+        left: 50%;
         top: 45%;
-        width: auto;  /* Larghezza automatica basata sul contenuto */
+        transform: translateX(-50%) translateZ(0);  /* translateZ forza GPU */
+        width: auto;
         height: 200px;
-        pading: 20px 30px 20px 30px;
         display: flex;
         flex-direction: column; 
         align-items: center; 
@@ -76,7 +75,10 @@
         gap: 20px;
         color: white;
         text-shadow: 10px 10px 15px rgba(0,0,0,0.8);
-        animation: tit-an 1.5s ease-in-out forwards;
+        animation: tit-an 1.5s ease-in-out both;
+        backface-visibility: hidden;  /* Previene flickering */
+        will-change: transform, opacity;
+        color: #f5f5dc;
     }
 
     .infos > h2{
@@ -101,18 +103,18 @@
     @@keyframes tit-an{
         0%{
             opacity: 0.4;
-            transform: translateY(250px) translateX(50%);
+            transform: translateY(250px) translateX(-50%) translateZ(0);
         }
-        
+
 
         100% {
             opacity: 1;
-            transform: translateY(0px) translateX(50%);
+            transform: translateY(0px) translateX(-50%) translateZ(0);
         }
     }
 
     .main-container{
-        margin-top: 100px;
+        margin-top: 150px;
         width: 100%;
         height: auto;
         display: flex;
@@ -129,6 +131,29 @@
         justify-content: space-between;
         color: rgba(255,255,255, 0.8);
         overflow: hidden; 
+    }
+
+    .chi-siamo {
+        width: 80%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        color: rgba(255,255,255, 0.8);
+        overflow: hidden;
+    }
+
+    .location {
+        margin-top: 170px;
+        width: 80%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        color: rgba(255,255,255, 0.8);
+        overflow: hidden;
+    }
+
+    .map-dark {
+        filter: invert(90%) hue-rotate(180deg) brightness(95%) contrast(90%);
     }
 
     .cont-par{
@@ -152,17 +177,51 @@
         height: auto;
         transition: transform 0.1s ease-out;  /* Transizione fluida */
         will-change: transform;  /* Ottimizzazione performance */
+
     }
 
-    .img-obs{
+    .slider-piz{
+        position: relative;
+        width: 40%;
+        height: auto;
+        transition: transform 0.1s ease-out; /* Transizione fluida */
+        will-change: transform; /* Ottimizzazione performance */
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: left;
+    }
+
+    .slides-piz{
+        display: flex;
+        flex-direction:row;
+        align-items: center;
+        justify-content: left;
+        width: 100%;
+        height: auto;
+    }
+
+    .slide-piz{
+        width: 100%;  
+        aspect-ratio: 3 / 2; /* Forza proporzioni 16:9 - tutte le immagini avranno la stessa altezza */
+        display: none;  
+        object-fit: cover;  
+    }
+
+    .slide-piz.active {
+        display: block;
+        object-fit: cover;
+    }
+
+    .img-obs, .img-obs2{
         visibility: hidden;
     }
 
-    .img-obs:nth-child(1).visible{
+    .img-obs.visible{
         animation: img-anim 3s forwards;
     }
 
-    .img-obs:nth-child(2).visible {
+    .img-obs2.visible {
         animation: img-anim2 3s forwards;
     }
 
@@ -215,7 +274,7 @@
     }
 
     .nostri-servizi{
-        margin-top: 120px;
+        margin-top: 170px;
         width: 100%;
         display: flex;
         flex-direction: row;
@@ -242,7 +301,6 @@
             transform: translateY(10px)
         }
     }
-
 
    
 </style>
@@ -274,10 +332,36 @@
         <div class="chi-siamo">
             
             <div class="cont-par par-obs">
-                <h1>About Us</h1>
-                <h4><strong>Slice Station</strong> was born in 2016 from a simple idea: bring <strong>real pizza</strong> — the kind with 24-hour risen dough and ingredients picked fresh from the market every day — into a casual, welcoming space. What started as a small wood-fired oven at Via dei Mille 14, Bologna, has since grown into a go-to spot for anyone craving <strong>artisanal pizza</strong> without giving up the pace of a quick night out with friends. The same passion from that first batch still guides every slice that comes out of our oven.</h4>
+                <h1>Our Products</h1>
+                <h4>Every pizza at Slice Station is <strong>crafted to surprise</strong>, without ever straying from tradition. From the autumn sweetness of pumpkin paired with crispy pancetta, to the lightness of our whole wheat oval-shaped pizza, all the way to the rich embrace of dark and milk chocolate for those who love to end on a sweet note: three different ways to reinvent pizza, one for every craving.</h4>
             </div>
-            <img src="~/src/pizzeria_orizzontale.jpg" class="f-pizzeria img-obs" />
+            <div class="slider-piz">
+                <div class="slides-piz img-obs2">
+
+                    <img src="~/src/pizza-zucca.jpg" class="slide-piz" />
+                    <img src="~/src/pizza-ovale.jpg" class="slide-piz" />
+                    <img src="~/src/pizza-dolce.jpg" class="slide-piz" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="location">
+        <!-- Mappa con modalità scura -->
+        <iframe 
+            class="map-dark"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d13312.765054544521!2d9.174672541800469!3d45.45642448190458!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4786c6aec34636a1%3A0xab7f4e27101a2e13!2sDuomo%20di%20Milano!5e0!3m2!1sit!2sit!4v1783525104911!5m2!1sit!2sit" 
+            width="40%" 
+            height="550px" 
+            style="border:0;" 
+            allowfullscreen="" 
+            loading="lazy" 
+            referrerpolicy="strict-origin-when-cross-origin">
+        </iframe>
+        
+        <div class="cont-par par-obs">
+            <h1>Find Us</h1>
+            <h4>Tucked along <strong>Via dei Mille 14</strong>, in the heart of Bologna, Slice Station is easy to reach whether you're strolling through the city or looking for the perfect spot to end your day. We're open Tuesday to Sunday, from 12:00 to 15:00 and 7:00 PM to 11:00 PM — closed on Mondays. Whether it's a quick lunch or a relaxed dinner with friends, come find us and grab a table.</h4>
         </div>
     </div>
 </div>
