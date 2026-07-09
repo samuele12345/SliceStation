@@ -1,6 +1,6 @@
 ﻿
 @{
-    ViewData["Title"] = "Menu"; 
+    ViewData["Title"] = "Our Menu"; 
 }
 
 <style>
@@ -9,6 +9,18 @@
         margin: 0 !important;
         padding: 0 !important;
         background
+    }
+
+    html, body {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        z-index: -5;
+        background: rgba(0,0,0,0.65);
+    }
+
+    h1, h2 {
+        font-family: 'Lora', sans-serif;
     }
 
     main {
@@ -24,7 +36,7 @@
         justify-content: center;
         gap: 15px;
         padding: 20px; /* ← Aggiungi padding interno */
-        margin-top: 60px;
+        margin-top: 80px;
     }
 
     #elencoPizze{
@@ -45,15 +57,41 @@
     }
 
     #searchInput {
-        padding: 10px;
-        border: 1px solid #ccc;
+        padding: 20px 10px;
         border-radius: 4px;
+        margin: 10px 0px;
+    }
+
+    .div-tit{
+        width:100%;
+        display:flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        height: 800px;
+    }
+
+    .main-title{
+        color: white;
+        font-size: 110px;
+        text-shadow: 10px 10px 10px rgba(0,0,0,0.2);
+    }
+
+    .div-tit {
+        background-image: url('/src/bg-menu.jpg');
+        background-size: cover; 
+        background-position: center; 
+        background-repeat: no-repeat; 
+        background-attachment: fixed; /* Effetto parallax */
     }
 </style>
 
 
 <div class="card-container">
-    <h1>@ViewData["Title"]</h1>
+    <div class="div-tit">
+        <h1 class="main-title">@ViewData["Title"]</h1>
+    </div>
+    
     <input type="text" id="searchInput" placeholder="Find Pizzas..."/>
     <div id="elencoPizze"></div>
 </div>

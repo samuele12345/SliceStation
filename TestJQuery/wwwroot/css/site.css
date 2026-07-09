@@ -56,12 +56,16 @@ main{
     width: 100vh;
 }
 
-.card{
+.card {
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: flex-start;
     gap: 100px;
+    background: rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.8);
+    transform: translateY(0px) translateX(0px);
+    transition: transform 0.7s ease-in-out;
 }
 
 .cont-img-piz{
@@ -79,19 +83,11 @@ main{
 }
 
 .card:hover {
-    animation: hov-piz 1s ease-out forwards;
     box-shadow: -7px 6px 10px rgba(0,0,0,0.2);
     cursor: pointer;
+    transform: translateY(-7px) translateX(7px);
+    transition: transform 0.7s ease-in-out;
 }
 
-@keyframes hov-piz{
-    0% {
-        transform: translateY(0px) translateX(0px);
-    }
-
-    100% {
-        transform: translateY(-7px) translateX(7px);
-    }
-}
 
 

@@ -6,6 +6,44 @@
         .nav-link{
             color: white;
         }
+
+        .pop-up{
+            position:absolute;
+            width: auto;
+            height: auto;
+            top: 70px;
+            background: black;
+            color: white;
+            padding: 5px 5px;
+            display:flex;
+            flex-direction: column;
+        }
+
+        .pop-up.hidden{
+            display:none;
+        }
+
+        #nav-reg{
+            position: relative;
+            display: flex;
+            flex-direction: row;
+            align-irtems: center;
+            justify-content: center;
+            
+            
+
+        }
+
+        .esc{
+            text-decoration: none;
+            color: white;
+            border-bottom: 1px solid transparent;
+        }
+
+        .esc:hover {
+            cursor: pointer;
+            text-decoration: underline;
+        }
     </style>
 
 <ul class="navbar-nav ms-auto">
@@ -21,6 +59,19 @@
     else
     {
         <li class="nav-item"><a class="nav-link" asp-controller="Account" asp-action="Login">Login</a></li>
-        <li class="nav-item"><a class="nav-link" asp-controller="Account" asp-action="Registration">Register</a></li>
+        <li class="nav-item" id="nav-reg"><a class="nav-link" asp-controller="Account" asp-action="Registration">
+            Register
+            <!--
+                <div class="pop-up">
+                    <strong>Register for exclusive discounts! </strong>
+                    <a class="esc">Close</a>
+                </div>
+            -->
+        </a></li>
+        
     }
 </ul>
+
+@section Scripts{
+    <script src="~/js/site.js"></script>
+}

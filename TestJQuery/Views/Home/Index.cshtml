@@ -302,7 +302,22 @@
         }
     }
 
-   
+    #link-home{
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+    }
+    
+    .link-menu {
+        border-bottom: 1px solid transparent;
+        color: white;
+        text-decoration: none;
+    }
+
+    .link-menu:hover {
+        border-bottom: 1px solid white;
+    }
 </style>
 
 <div class="slider">
@@ -333,7 +348,8 @@
             
             <div class="cont-par par-obs">
                 <h1>Our Products</h1>
-                <h4>Every pizza at Slice Station is <strong>crafted to surprise</strong>, without ever straying from tradition. From the autumn sweetness of pumpkin paired with crispy pancetta, to the lightness of our whole wheat oval-shaped pizza, all the way to the rich embrace of dark and milk chocolate for those who love to end on a sweet note: three different ways to reinvent pizza, one for every craving.</h4>
+                <h4>Every pizza at Slice Station is <strong>crafted to surprise</strong>, without ever straying from tradition. From the autumn sweetness of pumpkin paired with crispy pancetta, to the lightness of our whole wheat oval-shaped pizza, all the way to the rich embrace of dark and milk chocolate for those who love to end on a sweet note: three different ways to reinvent pizza, one for every craving. Explore our <a class="link-menu" asp-controller="Pizza" asp-action="Menu">Menu</a>.</h4>
+                
             </div>
             <div class="slider-piz">
                 <div class="slides-piz img-obs2">
