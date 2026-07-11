@@ -6,12 +6,11 @@
     <title>@ViewData["Title"] - TestJQuery</title>
     <script type="importmap"></script>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
 </head>
-<body>
+<body class="bod">
     <div class="container2">
-        <main class="pb-3">
+        <main >
             @RenderBody()
         </main>
     </div>
@@ -22,4 +21,46 @@
 
     @await RenderSectionAsync("Scripts", required: false)
 </body>
+
+<style>
+    body, html {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+    }
+
+    html {
+        background: rgba(0,0,0,0.9);
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* Animazione zoom dello sfondo */
+    .bod {
+        width: 90%;
+        transform: scaleX(0.95);
+        transition: transform 1.5s ease-out;
+    }
+
+    .bod.active {
+        transform: scaleX(1); /* ← Zoom al 100% */
+    }
+
+    .container2 {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+
+    main {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+    }
+</style>
+
 </html>

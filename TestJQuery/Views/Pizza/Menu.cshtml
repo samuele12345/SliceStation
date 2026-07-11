@@ -31,6 +31,7 @@
     
 
     .card-container {
+        position: relative;
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -43,6 +44,14 @@
         display: flex;
         flex-direction: column;
         gap: 10px;
+        min-height: 500px;
+    }
+
+    .loading-spinner {
+        text-align: center;
+        padding: 40px;
+        color: rgba(255, 255, 255, 0.8);
+        font-size: 18px;
     }
 
     .cont-pizza {
@@ -84,6 +93,21 @@
         background-repeat: no-repeat; 
         background-attachment: fixed; /* Effetto parallax */
     }
+
+    .notif {
+        display: none;
+    }
+
+    .notif.active{
+        top:50%;
+        left: 50%;
+        transform: translateY(-50%) translateX(-50%);
+        position: absolute;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
 </style>
 
 
@@ -93,7 +117,16 @@
     </div>
     
     <input type="text" id="searchInput" placeholder="Find Pizzas..."/>
-    <div id="elencoPizze"></div>
+    <div id="elencoPizze">
+        <div class="loading-spinner">
+            <p>Loading pizzas...</p>
+        </div>
+    </div>
+
+    <div class="notif">
+        <h3>Pizza Added!</h3>
+        <h5 class="but-continue">Continue</h5>
+    </div>
 </div>
 
 @section Scripts{

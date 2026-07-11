@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using TestJQuery.Data;
+using System.Security.Claims;
 
 namespace TestJQuery.Controllers
 {
@@ -23,9 +24,18 @@ namespace TestJQuery.Controllers
             return View();
         }
 
-        public IActionResult Cart()
+        public async Task<IActionResult> Cart()
         {
-            return View();
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            // TODO: Questo è temporaneo - dopo creerai CartItem
+            var cartItems = await _context.OrderedPizzas
+                .Include(op => op.Pizza)
+                .Include(op => op.Order)
+                .Where(op => op.Order.UserId == userId)
+                .ToListAsync();
+
+            return View(cartItems);
         }
 
 

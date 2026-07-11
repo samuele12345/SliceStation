@@ -1,9 +1,12 @@
-﻿$(document).ready(
+﻿
+/*
+$(document).ready(
     $.ajax({
-        url: "/Pizza/Cart",
+        url: "/Pizza/GetOrdPizzas",
         type: "GET",
         success: function (OrdPizzas) {
 
         }
     })
 )
+*/

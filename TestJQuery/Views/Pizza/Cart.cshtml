@@ -1,5 +1,5 @@
 ﻿@using Microsoft.AspNetCore.Identity
-@model Order
+@model List<OrderedPizza>
 @inject SignInManager<ApplicationUser> signInManager
 
 @{
@@ -16,18 +16,25 @@
         gap: 15px;
     }
 
-    #cont-order{
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
+    .cont-order{
+        margin-top: 100px;
     }
 </style>
 <div class="cont-order">
     <h2>@ViewData["Title"]</h2>
-    @if (Model.OrderedPizzas?.Any() == true)
+    @if (Model?.Any() == true)
     {
-        <div class="ordini"></div>
+        <div class="ordini">
+            @foreach (var item in Model)
+            {
+                <div class="cart-item">
+                    <h3>@item.Pizza.Name</h3>
+                    <p>Quantità: @item.Quantity</p>
+                    <p>Prezzo: €@(item.Pizza.Price * item.Quantity)</p>
+                </div>
+            }
+        </div>
+        <p><strong>Totale: €@Model.Sum(i => i.Pizza.Price * i.Quantity)</strong></p>
     }
     else
     {
@@ -41,5 +48,5 @@
 
 
 @section Scripts{
-    <script src=""></script>
+    <script src="~/js/Cart.js"></script>
 }
