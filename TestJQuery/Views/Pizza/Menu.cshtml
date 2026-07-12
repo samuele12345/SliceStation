@@ -1,4 +1,4 @@
-﻿
+﻿0
 @{
     ViewData["Title"] = "Our Menu"; 
 }
@@ -94,19 +94,55 @@
         background-attachment: fixed; /* Effetto parallax */
     }
 
-    .notif {
+    .notif-overlay {
         display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 9998;
     }
 
-    .notif.active{
-        top:50%;
+    .notif-overlay.active {
+        display: block;
+        background: rgba(255, 255, 255, 0.15);
+    }
+
+    .notif {
+        display: none;
+        top: 50%;
         left: 50%;
         transform: translateY(-50%) translateX(-50%);
-        position: absolute;
-        display: flex;
+        position: fixed;
         flex-direction: column;
         align-items: center;
         justify-content: center;
+        background: rgba(255,255, 255, 0.4);
+        color: black;
+        padding: 50px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
+        z-index: 9999;
+        min-width: 300px;
+    }
+
+    .notif > h3{
+        font-size: 35px;
+
+    }
+
+    .notif > h5 {
+        font-size: 25px;
+    }
+
+
+    .notif.active {
+        display: flex !important;
+    }
+
+    .but-continue:hover{
+        cursor: pointer;
+        border-bottom: 1px solid black;
     }
 </style>
 
@@ -123,6 +159,10 @@
         </div>
     </div>
 
+    <!-- Overlay scuro -->
+    <div class="notif-overlay"></div>
+
+    <!-- Notifica -->
     <div class="notif">
         <h3>Pizza Added!</h3>
         <h5 class="but-continue">Continue</h5>

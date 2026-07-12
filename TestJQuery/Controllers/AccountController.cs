@@ -5,6 +5,7 @@ using TestJQuery.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using System.ComponentModel;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace TestJQuery.Controllers
 {
@@ -81,6 +82,27 @@ namespace TestJQuery.Controllers
         public IActionResult Login()
         {
             return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Login(LoginViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, false, false);
+
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Incorrect email or password");
+                    return View(model);
+                }
+            }
+
+            return View(model);
         }
 
         public IActionResult Logout()

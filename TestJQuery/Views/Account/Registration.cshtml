@@ -33,21 +33,27 @@
         width: 100%;
     }
 
-    form{
-        background: rgba(0,0,0,0.8);
+    form {
+        background: rgba(0,0,0,0.5);
         width: 40%;
         margin: auto;
         border-radius: 10px;
-        padding: 50px 40px;
+        padding: 55px 45px;
         color: white;
-        
+        transition: 2s ease-in-out;
     }
+
+    form:hover {
+        background: rgba(0,0,0,0.7);
+        transition: 2s ease-in-out;
+    }
+
     span{
         margin-top: 10px;
     }
 
     label{
-        font-size: 25px;
+        font-size: 20px;
     }
 
     .bod {
@@ -55,10 +61,42 @@
         
     }
 
-    .bod.active{
-        width: 90%;
-        transition: transform 1.5s ease-out;
+    .bt-home {
+        margin-left: 20px;
     }
+
+    .div-buts {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        width: 100%;
+        justify-content: space-between;
+        height: auto;
+        margin-top: 30px;
+    }
+
+    .div-reg {
+        display: flex;
+        flex-direction: row;
+        height: 30px;
+        align-items: center;
+    }
+
+    p {
+        margin: auto;
+    }
+
+    .btn-gen {
+        background: rgba(231, 76, 60, 0.4);
+        background:;
+        color: white !important;
+    }
+
+    .btn-gen:hover {
+        background: rgba(231, 76, 60, 0.7);
+        color: rgba(255, 255, 255, 0.7) !important;
+    }
+
 </style>
 
 
@@ -102,7 +140,18 @@
                 <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
             </div>
 
-            <input type="submit" value="Registration" class="btn btn-success" />
+            
+
+            <div class="div-buts">
+                <div class="div-reg">
+                    <input type="submit" value="Registration" class="btn btn-gen" />
+                    <a asp-controller="Home" asp-action="Index" class="btn btn-gen bt-home">Home</a>
+                </div>
+                <div class="div-reg">
+                    <p class="bt-home">Do you already have an account?</p>
+                    <a asp-controller="Account" asp-action="Login" class="btn btn-gen bt-home">Login</a>
+                </div>
+            </div>
         </form>
     </div>
 </div>

@@ -30,6 +30,25 @@ function loadPizzas(searchString = "") {
     })
 }
 
+function pizObs() {
+    const pizzaDesc = document.querySelectorAll(".infos");
+
+    if (pizzaDesc.length === 0) return; 
+
+    const observer = new IntersectionObserver((items) => {
+        items.forEach(item => {
+            if (item.isIntersecting) {
+                item.target.classList.add("active");
+
+            }
+        })
+    }, { threshold: 0.3 });
+
+    pizzaDesc.forEach(el => {
+        observer.observe(el);
+    })
+}
+
 function renderPizzas(pizzas) {
     let html = ""; 
     let contPizze = $("#elencoPizze");
@@ -46,9 +65,9 @@ function renderPizzas(pizzas) {
                     <img id="img-piz" src="${pizza.image}" loading="lazy" alt="${pizza.name}"/>
                 </div>
                 <div class="cont-info-piz">
-                    <h3>${pizza.name}</h3>
-                    <p>${pizza.description}</p>
-                    <p><strong>€${pizza.price}</strong></p>
+                    <h3 class="infos">${pizza.name}</h3>
+                    <p class="infos">${pizza.description}</p>
+                    <p class="infos"><strong>€${pizza.price}</strong></p>
                 </div>
                 <div class="add-but-cont">
                     <h4 class="add-but">Add To Cart<h4>
@@ -57,19 +76,35 @@ function renderPizzas(pizzas) {
         `
     })
 
-    contPizze.html(html);
+    contPizze.html(html); 
+
+    pizObs();
+
 }
 
 
-// Event Delegation con jQuery
-$(document).on("click", ".add-but-cont", function() {
-    $(".notif").removeClass("active").addClass("active");
+// Event Delegation con jQuery - ascolta sia il div che il bottone
+$(document).on("click", ".add-but-cont, .add-but", function(e) {
+    e.stopPropagation(); // ← Evita conflitti con altri click
+    $(".notif-overlay").addClass("active").css("display", "block");
+    $(".notif").addClass("active").css("display", "flex");
+});
+
+$(document).on("click", ".but-continue", function () {
+    $(".notif-overlay").removeClass("active").css("display", "none");
+    $(".notif").removeClass("active").css("display", "none");
 });
 
 // Chiudi notifica al click fuori
-$(document).on("click", function(e) {
+$(".notif-overlay").on("click", function() {
     const notif = $(".notif");
-    if (notif.hasClass("active") && !$(e.target).closest(".notif").length) {
-        notif.removeClass("active");
+    const overlay = $(".notif-overlay");
+
+    if (notif.hasClass("active")) {
+        notif.removeClass("active").css("display", "none");
+        overlay.removeClass("active").css("display", "none");
     }
 });
+
+
+
