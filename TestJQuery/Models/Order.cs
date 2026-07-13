@@ -7,6 +7,7 @@ namespace TestJQuery.Models
         public int Id { get; set; }
 
         public DateTime OrderDate { get; set; }
+        public OrderStatus OrdSt { get; set; }
 
         [ForeignKey("UserId")]
         public string? UserId { get; set; }
@@ -14,5 +15,13 @@ namespace TestJQuery.Models
         public ApplicationUser? User { get; set; }
 
         public ICollection<OrderedPizza>? OrderedPizzas { get; set; }
+    }
+
+    public enum OrderStatus
+    {
+        InCart,
+        Confirmed,
+        Completed,
+        Cancelled
     }
 }

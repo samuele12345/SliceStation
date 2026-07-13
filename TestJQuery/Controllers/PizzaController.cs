@@ -1,7 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using TestJQuery.Data;
 using System.Security.Claims;
+using TestJQuery.Data;
+using TestJQuery.Models;
 
 namespace TestJQuery.Controllers
 {
@@ -38,6 +39,77 @@ namespace TestJQuery.Controllers
             return View(cartItems);
         }
 
+        
+
+        [HttpPost]
+        public async Task<IActionResult> PostOrd(int pizzaId, int quantity, string pizzaName, decimal pizzaPrice)
+        {
+            try
+            {
+                // ← Debug: stampa parametri ricevuti
+                Console.WriteLine($"Ricevuto: pizzaId={pizzaId}, quantity={quantity}, pizzaName={pizzaName ?? "NULL"}, price ={pizzaPrice}");
+
+                var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+                if(string.IsNullOrEmpty(userId))
+                {
+                    return Json(new { success = false, error = "Log before ordering" });
+                }
+
+                var cartOrd = await _context.Orders
+                    .Include(o => o.OrderedPizzas)
+                    .FirstOrDefaultAsync(o => o.UserId == userId && o.OrdSt == OrderStatus.InCart);
+
+                if(cartOrd == null)
+                {
+                    cartOrd = new Order
+                    {
+                        UserId = userId,
+                        OrderDate = DateTime.Now,
+                        OrdSt = OrderStatus.InCart,
+                        OrderedPizzas = new List<OrderedPizza>()
+                    };
+
+                    _context.Orders.Add(cartOrd);
+                    await _context.SaveChangesAsync();
+
+                    // ← RICARICA l'ordine con le pizze
+                    cartOrd = await _context.Orders
+                        .Include(o => o.OrderedPizzas)
+                        .FirstAsync(o => o.Id == cartOrd.Id);
+                }
+
+                var existingPizza = cartOrd.OrderedPizzas
+                    .FirstOrDefault(op => op.PizzaId == pizzaId);
+
+                if(existingPizza != null)
+                {
+                    existingPizza.Quantity += quantity;
+                    existingPizza.PriceSnapshot += pizzaPrice;
+                }
+                else
+                {
+                    _context.OrderedPizzas.Add(new OrderedPizza
+                    {
+                        OrderId = cartOrd.Id,
+                        PizzaId = pizzaId,
+                        Quantity = quantity,
+                        PizzaName = pizzaName,
+                        PriceSnapshot = pizzaPrice
+                    });
+                }
+
+                await _context.SaveChangesAsync();
+
+                return Json(new { success = true, message = "Pizza added successfully!" });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, error = ex.Message, details = ex.InnerException?.Message });
+            }
+        }
+
+        
 
         [HttpGet]
         public async Task<IActionResult> PizzaMethod(string? search)
@@ -66,4 +138,6 @@ namespace TestJQuery.Controllers
 
         
     }
+
+
 }
