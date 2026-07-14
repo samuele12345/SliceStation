@@ -19,6 +19,26 @@
     .cont-order{
         margin-top: 100px;
     }
+
+    .cart-item{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        border: 1px solid black;
+        margin-bottom: 15px;
+    }
+
+    .nam-quant{
+        width: auto;
+        
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-start;
+        white-space: nowrap;
+        gap: 30px;
+    }
 </style>
 <div class="cont-order">
     <h2>@ViewData["Title"]</h2>
@@ -28,13 +48,17 @@
             @foreach (var item in Model)
             {
                 <div class="cart-item">
-                    <h3>@item.Pizza.Name</h3>
-                    <p>Quantità: @item.Quantity</p>
-                    <p>Prezzo: €@(item.Pizza.Price * item.Quantity)</p>
+                    <div class="nam-quant">
+                        <h3>@item.Quantity</h3>
+                        <h3>@(item.PizzaName ?? item.Pizza?.Name ?? "Pizza senza nome")</h3>
+                        
+                    </div>
+                    
+                    <h3>Price: €@(item.PriceSnapshot % 10)</h3>
                 </div>
             }
         </div>
-        <p><strong>Totale: €@Model.Sum(i => i.Pizza.Price * i.Quantity)</strong></p>
+        <p><strong>Totale: €@Model.Sum(i => i.PriceSnapshot % 10)</strong></p>
     }
     else
     {

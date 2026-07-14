@@ -106,13 +106,25 @@ $(document).on("click", ".add-but-cont, .add-but", function(e) {
             pizzaPrice: pizzaPrice
         },
         success: function (response) {
-            console.log("Risposta server:", response); // ← Debug
+            // controlla se il server ha ritornato success: true o false
+            // entra in success in ogni caso a meno che ci siano errori di tipo 500 o 404
+            if (response.success === false) {
+                $(".succ").text(response.error || "Log before ordering");
+                console.error("Errore dal server:", response.error);
+            } else {
+                $(".succ").text("Pizza Added!");
+                console.log("Risposta server:", response);
+            }
+
             $(".notif-overlay").addClass("active").css("display", "block");
             $(".notif").addClass("active").css("display", "flex");
         },
         error: function (xhr) {
-            console.error("Errore:", xhr.responseJSON); // ← Debug
-            alert("Error adding pizza");
+            $(".succ").text("Connection error");
+            console.error("Errore HTTP:", xhr.responseJSON);
+
+            $(".notif-overlay").addClass("active").css("display", "block");
+            $(".notif").addClass("active").css("display", "flex");
         }
     })
 });
