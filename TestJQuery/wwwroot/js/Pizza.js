@@ -61,13 +61,15 @@ function renderPizzas(pizzas) {
     pizzas.forEach(function (pizza) {
         html += `
             <div class="card" data-pizza-id="${pizza.id}" data-pizza-name="${pizza.name}" data-pizza-price="${pizza.price}">
-                <div class="cont-img-piz">
-                    <img id="img-piz" src="${pizza.image}" loading="lazy" alt="${pizza.name}"/>
-                </div>
-                <div class="cont-info-piz">
-                    <h3 class="infos piz-name">${pizza.name}</h3>
-                    <p class="infos">${pizza.description}</p>
-                    <p class="infos"><strong>€${pizza.price}</strong></p>
+                <div class="cont-img-p">
+                    <div class="cont-img-piz">
+                        <img id="img-piz" src="${pizza.image}" loading="lazy" alt="${pizza.name}"/>
+                    </div>
+                    <div class="cont-info-piz">
+                        <h3 class="infos piz-name">${pizza.name}</h3>
+                        <p class="infos">${pizza.description}</p>
+                        <p class="infos"><strong>€${pizza.price}</strong></p>
+                    </div>
                 </div>
                 <div class="add-but-cont">
                     <h4 class="add-but">Add To Cart</h4>
