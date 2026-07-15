@@ -1,5 +1,4 @@
 ﻿@using Microsoft.AspNetCore.Identity
-@model List<OrderedPizza>
 @inject SignInManager<ApplicationUser> signInManager
 
 @{
@@ -8,6 +7,19 @@
 }
 
 <style>
+
+    p, h1, h3, h4{
+        color: white;
+    }
+
+    html, body{
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        z-index: -5;
+        background: rgba(0,0,0,0.65);
+    }
+
     #div-bottoni{
         display: flex;
         flex-direction: row;
@@ -17,7 +29,7 @@
     }
 
     .cont-order{
-        margin-top: 100px;
+        margin-top: 10px;
     }
 
     .cart-item{
@@ -25,8 +37,10 @@
         flex-direction: row;
         align-items: center;
         justify-content: space-between;
-        border: 1px solid black;
         margin-bottom: 15px;
+        background: rgba(0,0,0,0.1);
+        border-radius: 10px;
+        padding: 25px 10px;
     }
 
     .nam-quant{
@@ -39,8 +53,76 @@
         white-space: nowrap;
         gap: 30px;
     }
+
+    .div-tit {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        height: 800px;
+        background-image: url('/src/bg-cart.jpg');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-attachment: fixed; /* Effetto parallax */
+    }
+
+    @@media(max-width: 1600px) {
+        .div-tit {
+            height: 80vh;
+        }
+    }
+
+    .card-container {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 15px;
+        padding: 20px; /* ← Aggiungi padding interno */
+        margin-top: 80px;
+        min-height: 1000px;
+    }
+
+    .main-title {
+        color: white;
+        font-size: 110px;
+        text-shadow: 10px 10px 10px rgba(0,0,0,0.1);
+    }
+
+    h1, h2 {
+        font-family: 'Lora', sans-serif;
+    }
+
+    .div-load{
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        min-height: 500px;
+        margin-top: 30px;
+    }
+
+    .btn-gen {
+        background: rgba(231, 76, 60, 0.4);
+        background:;
+        color: white !important;
+    }
+
+    .btn-gen:hover {
+        background: rgba(231, 76, 60, 0.7);
+        color: rgba(255, 255, 255, 0.7) !important;
+    }
 </style>
-<div class="cont-order">
+
+<div class="card-container">
+    <div class="div-tit">
+        <h1 class="main-title">@ViewData["Title"]</h1>
+    </div>
+
+    <div class="cont-order">
+        @*
     <h2>@ViewData["Title"]</h2>
     @if (Model?.Any() == true)
     {
@@ -51,9 +133,9 @@
                     <div class="nam-quant">
                         <h3>@item.Quantity</h3>
                         <h3>@(item.PizzaName ?? item.Pizza?.Name ?? "Pizza senza nome")</h3>
-                        
+
                     </div>
-                    
+
                     <h3>Price: €@(item.PriceSnapshot % 10)</h3>
                 </div>
             }
@@ -68,7 +150,24 @@
         <button>Our Pizzas</button>
         <button>Checkout</button>
     </div>
+    *@
+
+        <div class="ordini">
+            <div class="div-load">
+                <p>Loading Cart...</p>
+            </div>
+            
+        </div>
+        <p class="tot"><strong></strong></p>
+
+        <div id="div-bottoni">
+            <a class="btn btn-gen" asp-controller="Pizza" asp-action="Menu">Our Pizzas</a>
+            <button class="btn btn-gen">Checkout</button>
+        </div>
+    </div>
 </div>
+
+
 
 
 @section Scripts{
