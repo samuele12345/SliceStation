@@ -6,6 +6,7 @@
 *.dbmdl
 *.cache
 TestJQuery/appsettings.Local.json
+TestJQuery/appsettings.Development.json
 
 # File di appunti privati per lo sviluppo
 DEVNOTES.md
