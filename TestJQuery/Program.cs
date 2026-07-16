@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Stripe;
 using TestJQuery.Data;
 using TestJQuery.Models;
 
@@ -28,6 +29,10 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>(option =>
 builder.Services.AddLogging();
 
 var app = builder.Build();
+
+// Configura Stripe con la chiave segreta da appsettings
+StripeConfiguration.ApiKey = builder.Configuration["Stripe:SecretKey"];
+
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {

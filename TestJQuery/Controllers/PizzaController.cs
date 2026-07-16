@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.EntityFrameworkCore;
+using Stripe;
 using System.Security.Claims;
 using TestJQuery.Data;
 using TestJQuery.Models;
@@ -145,6 +146,23 @@ namespace TestJQuery.Controllers
                 .ToListAsync();
 
             return Json(pizzas);
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> stripeCheckout()
+        {
+            var options = new PaymentIntentCreateOptions
+            {
+                Amount = 500,
+                Currency = "gbp",
+                PaymentMethod = "pm_card_visa",
+                PaymentMethodTypes = new List<string> { "card" },
+            };
+            var service = new PaymentIntentService();
+            PaymentIntent paymentIntent = service.Create(options);
+
+            return Json(new { success = true });
         }
 
         
