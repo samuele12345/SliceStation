@@ -106,8 +106,11 @@
 
     .btn-gen {
         background: rgba(231, 76, 60, 0.4);
-        background:;
         color: white !important;
+        padding: 10px 20px;
+        border-radius: 5px;
+        text-decoration: none;
+        z-index: 10;
     }
 
     .btn-gen:hover {
@@ -162,7 +165,7 @@
 
         <div id="div-bottoni">
             <a class="btn btn-gen" asp-controller="Pizza" asp-action="Menu">Our Pizzas</a>
-            <button class="btn btn-gen">Checkout</button>
+            <a class="btn btn-gen btn-ck">Checkout</a>
         </div>
     </div>
 </div>
@@ -171,5 +174,9 @@
 
 
 @section Scripts{
+    <!-- Campo nascosto per passare la chiave pubblica Stripe al JS -->
+    <input type="hidden" id="stripe-publishable-key" value="@ViewData["StripePublishableKey"]" />
+
+    <script src="https://js.stripe.com/v3/"></script>
     <script src="~/js/Cart.js"></script>
 }

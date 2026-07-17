@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Stripe;
+using Stripe.Checkout;
 using System.Security.Claims;
 using TestJQuery.Data;
 using TestJQuery.Models;
@@ -11,10 +12,12 @@ namespace TestJQuery.Controllers
     public class PizzaController : Controller
     {
         private readonly TestJQueryContext _context;
+        private readonly IConfiguration _configuration;
 
-        public PizzaController(TestJQueryContext context)
+        public PizzaController(TestJQueryContext context, IConfiguration configuration)
         {
             _context = context;
+            _configuration = configuration;
         }
 
         public IActionResult Index()
@@ -29,6 +32,7 @@ namespace TestJQuery.Controllers
 
         public IActionResult Cart()
         {
+            ViewData["StripePublishableKey"] = _configuration["Stripe:PublishableKey"];
             return View();
         }
 
@@ -150,19 +154,42 @@ namespace TestJQuery.Controllers
 
 
         [HttpPost]
-        public async Task<IActionResult> stripeCheckout()
+        public async Task<IActionResult> stripeCheckout(long total)
         {
-            var options = new PaymentIntentCreateOptions
+            if(total == 0)
             {
-                Amount = 500,
-                Currency = "gbp",
-                PaymentMethod = "pm_card_visa",
-                PaymentMethodTypes = new List<string> { "card" },
-            };
-            var service = new PaymentIntentService();
-            PaymentIntent paymentIntent = service.Create(options);
+                return Json(new { success = false, message = "Inserire dei prodotti nel carrello" });
+            }
 
-            return Json(new { success = true });
+            var options = new SessionCreateOptions
+            {
+                PaymentMethodTypes = new List<string> { "card" },
+                LineItems = new List<SessionLineItemOptions>
+                {
+                    new SessionLineItemOptions
+                    {
+                        PriceData = new SessionLineItemPriceDataOptions
+                        {
+                            UnitAmount = total, // ← GIÀ IN CENTESIMI dal frontend!
+                            Currency = "eur",
+                            ProductData = new SessionLineItemPriceDataProductDataOptions
+                            {
+                                Name = "Ordine Pizzeria",
+                                Description = "Ordine dal carrello"
+                            }
+                        },
+                        Quantity = 1
+                    }
+                },
+                Mode = "payment",
+                SuccessUrl = "https://localhost:5218/Pizza/Success",
+                CancelUrl = "https://localhost:5218/Pizza/Cart"
+            };
+
+            var service = new SessionService();
+            Session session = await service.CreateAsync(options);
+
+            return Json(new { sessionId = session.Id });
         }
 
         
