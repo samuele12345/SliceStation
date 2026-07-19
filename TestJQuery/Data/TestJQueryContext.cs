@@ -24,7 +24,7 @@ namespace TestJQuery.Data
             modelBuilder.Entity<OrderedPizza>()
                 .HasOne(p => p.Pizza)
                 .WithMany(op => op.OrderedPizzas)
-                .HasForeignKey(p => p.OrderId);
+                .HasForeignKey(p => p.PizzaId);
 
             modelBuilder.Entity<Order>()
                 .HasOne(au => au.User)
