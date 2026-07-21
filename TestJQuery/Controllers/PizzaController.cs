@@ -36,6 +36,11 @@ namespace TestJQuery.Controllers
             return View();
         }
 
+        public IActionResult Success()
+        {
+            return View();
+        }
+
         [HttpGet]
         public async Task<IActionResult> CartData()
         {
@@ -272,6 +277,8 @@ namespace TestJQuery.Controllers
                 return RedirectToAction("Cart");
             }
         }
+
+        
 
 
     }
