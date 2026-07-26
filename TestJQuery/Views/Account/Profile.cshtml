@@ -3,7 +3,7 @@
 @inject UserManager<ApplicationUser> userManager;
 
 @{
-    ViewData["Title"] = "Profile";
+    ViewData["Title"] = "Your Profile";
     var user = await userManager.GetUserAsync(User);
 }
 
@@ -15,33 +15,110 @@
         justify-content: flex-start;
         gap:5px;
         height: 100px;
-        width: 200px;
+        width: auto;
+        font-size: 20px;
+        font-weight: 500;
     }
+
+    .box-container{
+        margin-top: 100px !important;
+        box-shadow: 10px 10px 20px rgba(0,0,0,0.2);
+        background: rgba(255, 255, 255, 0.8);
+        padding: 30px 20px;
+        transition: 1.5s ease-in-out;
+    }
+
+    .box-container:hover {
+        transition: 1.5s ease-in-out;
+        background: rgba(255, 255, 255, 1);
+    }
+
+    .div-tit{
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        background: rgba(0,0,0,0.5);
+        padding: 20px 0px;
+        font-size: 30px;
+    }
+
+
+    .modifica {
+        background: rgba(231, 76, 60, 0.6);
+        color: white !important;
+        padding: 10px 20px;
+        border-radius: 5px;
+        text-decoration: none;
+        z-index: 10;
+        font-weight: 400!important;
+        font-size: 20px !important;
+    }
+
+    .modifica:hover {
+        background: rgba(231, 76, 60, 1);
+        color: rgba(255, 255, 255, 0.7) !important;
+    }
+
+    body{
+        display: flex;
+        felx-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 80vh;
+        width: 100%;
+        background-image: url('/src/customers.jpg');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        z-index: -1;
+    }
+
+    .cont-but{
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+    }
+
+    input{
+        border: none;
+        height: 30px;
+        padding: 5px;
+    }
+
 </style>
 
-<h2>@ViewData["Title"]</h2>
 
 
 <div class="box-container">
-    
-    <div class="campo">
-        <p class="campo-mail">Email: @user?.Email</p>
-        
+
+    <div class="div-tit">
+        <h2>@ViewData["Title"]</h2>
     </div>
 
-    <div class="campo">
-        <p class="campo-name">Name: @user.FullName</p>
-    </div>
+    <div class="box-container2">
+        <div class="campo">
+            <p class="campo-mail">Email: @user?.Email</p>
 
-    <div class="campo">
-        <p class="campo-address">Address: @user.Address</p>
+        </div>
+
+        <div class="campo">
+            <p class="campo-name">Name: @user.FullName</p>
+        </div>
+
+        <div class="campo">
+            <p class="campo-address">Address: @user.Address</p>
+        </div>
     </div>
     
+    <div class="cont-but">
+        <button class="modifica btn">Modifica</button>
+    </div>
+
 </div>
 
-<div>
-    <button class="modifica">Modifica</button>
-</div>
+
 
 
 @section Scripts{

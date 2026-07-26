@@ -1,6 +1,6 @@
 ﻿$(document).ready(function () {
     const modBut = $(".modifica");
-    const contDati = $(".box-container");
+    const contDati = $(".box-container2");
 
     let inModifica = false;
 
@@ -25,7 +25,6 @@
 
                         contDati.html(
                             `
-                                
 
                                 <div class="campo">
                                     <p class="campo-mail">Email: ${response.email}</p>
@@ -39,7 +38,7 @@
                                 <div class="campo">
                                     <p class="campo-address">Address: ${response.address}</p>
                                 </div>
-                                
+
                             `
                         )
                         modBut.text("Modifica");
@@ -97,6 +96,10 @@
 
                         
                                 </div>
+
+                                <style>
+                                    
+                                </style>
                             `
                         )
                     }
